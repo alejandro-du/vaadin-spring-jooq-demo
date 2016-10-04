@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.tables.Customer;
 import com.vaadin.annotations.Theme;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.server.VaadinRequest;
