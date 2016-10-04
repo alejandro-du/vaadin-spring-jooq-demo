@@ -1,6 +1,6 @@
 package com.example;
 
-import com.example.tables.Customer;
+import com.example.tables.records.CustomerRecord;
 import com.vaadin.annotations.Theme;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.server.VaadinRequest;
@@ -36,8 +36,8 @@ public class VaadinUI extends UI {
     }
 
     private void updateGrid(String filter) {
-        List<Customer> customers = service.searchByName(filter);
-        grid.setContainerDataSource(new BeanItemContainer<>(Customer.class, customers));
+        List<CustomerRecord> customers = service.searchByName(filter);
+        grid.setContainerDataSource(new BeanItemContainer<>(CustomerRecord.class, customers));
     }
 
 }
