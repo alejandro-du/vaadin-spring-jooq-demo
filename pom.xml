@@ -86,7 +86,6 @@
             <plugin>
                 <groupId>org.jooq</groupId>
                 <artifactId>jooq-codegen-maven</artifactId>
-                <version>3.8.4</version>
                 <executions>
                     <execution>
                         <goals>
@@ -114,6 +113,41 @@
                 </configuration>
             </plugin>
         </plugins>
+        <pluginManagement>
+        	<plugins>
+        		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+
+        		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+        		<plugin>
+        			<groupId>org.eclipse.m2e</groupId>
+        			<artifactId>lifecycle-mapping</artifactId>
+        			<version>1.0.0</version>
+        			<configuration>
+        				<lifecycleMappingMetadata>
+        					<pluginExecutions>
+        						<pluginExecution>
+        							<pluginExecutionFilter>
+        								<groupId>org.jooq</groupId>
+        								<artifactId>
+        									jooq-codegen-maven
+        								</artifactId>
+        								<versionRange>
+        									[3.8.4,)
+        								</versionRange>
+        								<goals>
+        									<goal>generate</goal>
+        								</goals>
+        							</pluginExecutionFilter>
+        							<action>
+        							<execute><runOnConfiguration>true</runOnConfiguration></execute>
+        							</action>
+        						</pluginExecution>
+        					</pluginExecutions>
+        				</lifecycleMappingMetadata>
+        			</configuration>
+        		</plugin>
+        	</plugins>
+        </pluginManagement>
     </build>
 
 
