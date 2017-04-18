@@ -1,8 +1,6 @@
 package com.example;
 
 import com.example.tables.records.CustomerRecord;
-import com.vaadin.annotations.Theme;
-import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.Grid;
@@ -14,22 +12,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @SpringUI
-@Theme("valo")
 public class VaadinUI extends UI {
 
     @Autowired
     private CustomerService service;
 
-    private Grid grid = new Grid();
+    private Grid<CustomerRecord> grid = new Grid(CustomerRecord.class);
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
         TextField filter = new TextField("Filter by name:");
-        filter.addTextChangeListener(e -> updateGrid(e.getText()));
+        filter.addValueChangeListener(e -> updateGrid(filter.getValue()));
 
         VerticalLayout layout = new VerticalLayout(filter, grid);
-        layout.setMargin(true);
-        layout.setSpacing(true);
         setContent(layout);
         updateGrid("");
         grid.setColumns("firstName", "lastName");
@@ -37,7 +32,7 @@ public class VaadinUI extends UI {
 
     private void updateGrid(String filter) {
         List<CustomerRecord> customers = service.searchByName(filter);
-        grid.setContainerDataSource(new BeanItemContainer<>(CustomerRecord.class, customers));
+        grid.setItems(customers);
     }
 
 }
