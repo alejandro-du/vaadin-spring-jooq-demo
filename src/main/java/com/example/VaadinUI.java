@@ -1,31 +1,26 @@
 package com.example;
 
 import com.example.tables.records.CustomerRecord;
-import com.vaadin.server.VaadinRequest;
-import com.vaadin.spring.annotation.SpringUI;
-import com.vaadin.ui.Grid;
-import com.vaadin.ui.TextField;
-import com.vaadin.ui.UI;
-import com.vaadin.ui.VerticalLayout;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.router.Route;
 
 import java.util.List;
 
-@SpringUI
-public class VaadinUI extends UI {
+@Route("")
+public class VaadinUI extends VerticalLayout {
 
-    @Autowired
-    private CustomerService service;
+    private final CustomerService service;
 
-    private Grid<CustomerRecord> grid = new Grid(CustomerRecord.class);
+    private Grid<CustomerRecord> grid = new Grid<>(CustomerRecord.class);
 
-    @Override
-    protected void init(VaadinRequest vaadinRequest) {
+    public VaadinUI(CustomerService service) {
+        this.service = service;
         TextField filter = new TextField("Filter by name:");
         filter.addValueChangeListener(e -> updateGrid(filter.getValue()));
 
-        VerticalLayout layout = new VerticalLayout(filter, grid);
-        setContent(layout);
+        add(filter, grid);
         updateGrid("");
         grid.setColumns("firstName", "lastName");
     }
